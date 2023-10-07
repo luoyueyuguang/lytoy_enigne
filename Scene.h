@@ -4,15 +4,28 @@
 
 #ifndef LYTOY_ENIGNE_SCENE_H
 #define LYTOY_ENIGNE_SCENE_H
+
+#include <vector>
 #include "defines.h"
+#include "Sprite.h"
+
 class Scene
 {
 public:
-    Scene(const char* file_name, Rect* src, Rect* dst):file_name(file_name), src(*src),  dst(*dst){};
+    Scene(const char* file_name, Rect* src, Rect* dst);
     ~Scene();
 
     void load_texture(Render* render);
+
+
     void render(Render* render);
+    void render(Render *render, double angle, SDL_Point *center, auto flip);
+    void render_sprite(Render* render);
+
+    void add_sprite(Sprite* sprite);
+
+
+
 private:
     const char* file_name = nullptr;
 
@@ -21,7 +34,7 @@ private:
     Rect dst = {0, 0, 0, 0};
     Rect src = {0, 0, 0, 0};
 
-    void render(Render *render, double angle, SDL_Point *center, auto flip);
+    std::vector<Sprite*> sprites;
 };
 
 #endif //LYTOY_ENIGNE_SCENE_H
