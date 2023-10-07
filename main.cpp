@@ -10,5 +10,4 @@ int main()
     int i = 100;
     Window window("test", SDL_WINDOW_SHOWN, 800, 600);
     Render* render = window.CreateRenderer();
-
 }
