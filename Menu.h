@@ -6,7 +6,9 @@
 #define LY_ENGINE_MENU_H
 
 
-class Menu {
+class Menu
+{
+
 
 };
 

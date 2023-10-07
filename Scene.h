@@ -5,11 +5,10 @@
 #ifndef LYTOY_ENIGNE_SCENE_H
 #define LYTOY_ENIGNE_SCENE_H
 #include "defines.h"
-
 class Scene
 {
 public:
-    Scene(const char* file_name, Rect* dst, Rect* src):file_name(file_name), dst(*dst), src(*src){};
+    Scene(const char* file_name, Rect* src, Rect* dst):file_name(file_name), src(*src),  dst(*dst){};
     ~Scene();
 
     void load_texture(Render* render);

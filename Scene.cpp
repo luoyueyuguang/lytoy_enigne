@@ -19,8 +19,7 @@ void Scene::render(Render *render)
     SDL_RenderCopy(render, texture, &src, &dst);
 }
 
-void Scene::render(Render *render, double angle, SDL_Point *center, auto flip)
-{
+void Scene::render(Render *render, double angle, SDL_Point *center, auto flip) {
     SDL_RenderCopyEx(render, texture, &src, &dst, angle, center, flip);
 }
 
