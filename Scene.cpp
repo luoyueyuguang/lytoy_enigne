@@ -7,7 +7,8 @@
 
 Scene::Scene(const char *file_name, Rect *src, Rect *dst) : file_name(file_name), src(*src), dst(*dst) {}
 
-Scene::~Scene() {
+Scene::~Scene()
+{
     SDL_DestroyTexture(this->texture);
 }
 
@@ -26,7 +27,8 @@ void Scene::render(Render *render) {
 
 }
 
-void Scene::render(Render *render, double angle, SDL_Point *center, auto flip) {
+void Scene::render(Render *render, double angle, SDL_Point *center, auto flip)
+{
     SDL_RenderCopyEx(render, this->texture, &this->src, &this->dst, angle, center, flip);
 }
 

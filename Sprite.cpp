@@ -104,3 +104,4 @@ uint8_t Sprite::get_flip()
 {
     return this->flip;
 }
+

@@ -5,6 +5,7 @@
 #ifndef LY_ENGINE_SPRITE_H
 #define LY_ENGINE_SPRITE_H
 
+#include <queue>
 #include "defines.h"
 
 class Sprite
@@ -43,9 +44,13 @@ private:
 
     Rect dst = {0, 0, 0, 0};
     Rect src = {0, 0, 0, 0};
+
     double angle = 0;
     SDL_Point* center = nullptr;
     SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+    template<typename T>
+    std::queue<Rect> animation;
 };
 
 
