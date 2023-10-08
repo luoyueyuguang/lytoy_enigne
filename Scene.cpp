@@ -5,11 +5,17 @@
 #include "Scene.h"
 
 
-Scene::Scene(const char *file_name, Rect *src, Rect *dst) : file_name(file_name), src(*src), dst(*dst) {}
+Scene::Scene(const char *file_name, Rect *src, Rect *dst)
+{
+    this->file_name = file_name;
+    this->src = *src;
+    this->dst = *dst;
+}
 
 Scene::~Scene()
 {
     SDL_DestroyTexture(this->texture);
+    sprites.clear();
 }
 
 void Scene::load_texture(Render *render)
@@ -42,10 +48,12 @@ void Scene::render_sprite(Render *render)
     }
 }
 
-void Scene::add_sprite(Sprite* sprite)
+int Scene::add_sprite(Sprite* sprite)
 {
     static int id = 0;
     this->sprites.emplace_back(id, sprite);
+    id ++;
+    return id - 1;
 }
 
 int Scene::get_sprite_id(Sprite* sprite)

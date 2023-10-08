@@ -9,7 +9,7 @@
 #include "defines.h"
 #include "Sprite.h"
 
-class Scene
+class Scene : public GameObject
 {
 public:
     Scene(const char* file_name, Rect* src, Rect* dst);
@@ -22,17 +22,10 @@ public:
     void render(Render *render, double angle, SDL_Point *center, auto flip);
     void render_sprite(Render* render);
 
-    void add_sprite(Sprite* sprite);
+    int add_sprite(Sprite* sprite);
     int get_sprite_id(Sprite *sprite);
     void del_sprite(Sprite* sprite = nullptr, int id = -1);
-
 private:
-    const char* file_name = nullptr;
-
-    Texture* texture = nullptr;
-
-    Rect dst = {0, 0, 0, 0};
-    Rect src = {0, 0, 0, 0};
 
     std::vector<std::pair<int, Sprite*>> sprites;
     GameEvent event;
