@@ -4,62 +4,20 @@
 
 #include "Window.h"
 
-Window::Window(const char* title, Uint32 flags, int width, int height, int x, int y):
-flags(flags), width(width), height(height), x(x), y(y)
+Window::Window(const char* title, Uint32 flags, int width, int height, int x, int y) : GameObject(title)
 {
-    window = SDL_CreateWindow(title, x, y, width, height, flags);
+    this->file_name = title;
+    this->flags = flags;
+    this->width = width;
+    this->height = height;
+    this->x = x;
+    this->y = y;
+    window = SDL_CreateWindow(this->file_name, this->x, this->y, this->width, this->height, this->flags);
 }
 
 void Window::CreateRenderer()
 {
     this->render = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
-}
-
-void Window::set_x(int x)
-{
-    this->x = x;
-}
-
-void Window::set_y(int y)
-{
-    this->y = y;
-}
-
-void Window::set_width(int w)
-{
-    this->width = w;
-}
-
-void Window::set_height(int h)
-{
-    this->height = h;
-}
-
-int Window::get_x()
-{
-    return this->x;
-}
-
-int Window::get_y()
-{
-    return this->y;
-}
-
-int Window::get_width()
-{
-    return this->width;
-}
-
-int Window::get_height()
-{
-    return this->height;
-}
-
-void Window::add_scene(Scene *scene)
-{
-    static int id = 0;
-    scenes.emplace_back(id, scene);
-    id++;
 }
 
 int Window::get_scene_id(Scene *scene) {
@@ -93,13 +51,13 @@ void Window::del_scene(Scene *scene, int id)
     }
 }
 
-void Window::set_scene(int id)
+void Window::render_scene(int id)
 {
     for (auto& s : this->scenes)
     {
         if (s.first == id)
         {
-            s.second->load_texture(render);
+            s.second->render(this->render);
             return;
         }
     }
@@ -115,16 +73,70 @@ void Window::RenderPresent()
     SDL_RenderPresent(this->render);
 }
 
-void Window::RenderScene(int id)
+int Window::add_scene(Scene *scene)
+{
+    static int id = 0;
+    scenes.emplace_back(id, scene);
+    id++;
+    return id - 1;
+}
+
+void Window::render_scene(Scene *scene)
 {
     for (auto& s : this->scenes)
     {
-        if (s.first == id)
+        if (s.second == scene)
         {
             s.second->render(this->render);
             return;
         }
     }
-
 }
 
+void Window::render_scene(const char *name)
+{
+    for (auto& s : this->scenes)
+    {
+        if (s.second->get_name() == name)
+        {
+            s.second->render(this->render);
+            return;
+        }
+    }
+}
+
+void Window::load_scene(Scene *scene)
+{
+    for (auto& s : this->scenes)
+    {
+        if (s.second == scene)
+        {
+            s.second->load_texture(this->render);
+            return;
+        }
+    }
+}
+
+void Window::load_scene(int id)
+{
+    for (auto& s : this->scenes)
+    {
+        if (s.first == id)
+        {
+            s.second->load_texture(this->render);
+            return;
+        }
+    }
+}
+
+void Window::load_scene(const char *name)
+{
+    for (auto& s : this->scenes)
+    {
+        if (s.second->get_name() == name)
+        {
+            s.second->load_texture(this->render);
+            return;
+        }
+    }
+}

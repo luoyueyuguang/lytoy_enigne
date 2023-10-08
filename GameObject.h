@@ -10,6 +10,9 @@
 class GameObject
 {
 public:
+    explicit GameObject(const char* file_name);
+    void load_texture(Render* render);
+    ~GameObject();
     void set_dst(int x, int y, int w, int h);
     void set_src(int x, int y, int w, int h);
 
@@ -17,6 +20,7 @@ public:
     int get_y();
     int get_w();
     int get_h();
+    const char* get_name();
 
     void set_x(int x);
     void set_y(int y);

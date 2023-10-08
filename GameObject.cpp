@@ -59,3 +59,21 @@ void GameObject::set_h(int h)
 {
     this->dst.h = h;
 }
+
+const char *GameObject::get_name() {
+    return this->file_name;
+}
+
+GameObject::~GameObject() {
+    SDL_DestroyTexture(this->texture);
+}
+
+[[maybe_unused]] GameObject::GameObject(const char *file_name)
+{
+    this->file_name = file_name;
+}
+
+void GameObject::load_texture(Render *render)
+{
+    this->texture = IMG_LoadTexture(render, this->file_name);
+}

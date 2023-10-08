@@ -7,7 +7,7 @@
 #include "defines.h"
 #include "Scene.h"
 
-class Window
+class Window : virtual public GameObject
 {
 public:
     Window(const char* title, Uint32 flags,  int width, int height,
@@ -16,22 +16,19 @@ public:
     void CreateRenderer();
     void RenderPresent();
     void RenderClear();
-    void RenderScene(int id);
 
-    void set_x(int x);
-    void set_y(int y);
-    void set_width(int w);
-    void set_height(int h);
-
-    int get_x();
-    int get_y();
-    int get_width();
-    int get_height();
-
-    void add_scene(Scene* scene);
+    int add_scene(Scene* scene);
     int get_scene_id(Scene* scene);
     void del_scene(Scene* scene = nullptr, int id = -1);
-    void set_scene(int id);
+
+    void load_scene(Scene* scene);
+    void load_scene(int id);
+    void load_scene(const char* name);
+
+
+    void render_scene(int id);
+    void render_scene(Scene* scene);
+    void render_scene(const char* name);
 
 private:
     int x;

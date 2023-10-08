@@ -1,22 +1,25 @@
 #include "defines.h"
 #include "Scene.h"
-#include "Menu.h"
 #include "Window.h"
 #include "Sprite.h"
-
+#include "Ui.h"
 
 #undef main
 int main()
 {
-    int i = 100;
     Window window{"test", SDL_WINDOW_SHOWN, 980, 540};
     window.CreateRenderer();
-    Scene scene("../res/background.png", new Rect{0, 0, 1960, 1080},
-                new Rect{0, 0, 980, 540});
-    window.add_scene(&scene);
-    window.set_scene(0);
+    Scene scene{"../res/background.png"};
+    scene.set_dst(0, 0, 980, 540);
+    scene.set_src(0, 0, 1960, 1080);
+    UI ui{"../res/background.png"};
 
+
+    //window.add_scene(&ui);
+    //window.load_scene(&ui);
+    window.add_scene(&scene);
+    window.load_scene(&scene);
     window.RenderClear();
-    window.RenderScene(0);
+    window.render_scene(&scene);
     window.RenderPresent();
 }

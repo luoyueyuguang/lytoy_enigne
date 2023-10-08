@@ -12,19 +12,29 @@
 class Scene : public GameObject
 {
 public:
-    Scene(const char* file_name, Rect* src, Rect* dst);
+    Scene(const char* file_name);
+
     ~Scene();
-
-    void load_texture(Render* render);
-
 
     void render(Render* render);
     void render(Render *render, double angle, SDL_Point *center, auto flip);
+
+    void load_sprite(Render* render);
+    static void load_sprite(Render* render, Sprite* sprite);
+    void load_sprite(Render* render, int id);
+    void load_sprite(Render* render, const char* name);
+
     void render_sprite(Render* render);
+    static void render_sprite(Render* render, Sprite* sprite);
+    void render_sprite(Render* render, int id);
+    void render_sprite(Render* render, const char* name);
 
     int add_sprite(Sprite* sprite);
     int get_sprite_id(Sprite *sprite);
-    void del_sprite(Sprite* sprite = nullptr, int id = -1);
+
+    void del_sprite(Sprite* sprite);
+    void del_sprite(int id);
+    void del_sprite(const char* name);
 private:
 
     std::vector<std::pair<int, Sprite*>> sprites;

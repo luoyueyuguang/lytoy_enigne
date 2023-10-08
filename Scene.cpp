@@ -4,28 +4,13 @@
 
 #include "Scene.h"
 
-
-Scene::Scene(const char *file_name, Rect *src, Rect *dst)
-{
-    this->file_name = file_name;
-    this->src = *src;
-    this->dst = *dst;
-}
-
 Scene::~Scene()
 {
-    SDL_DestroyTexture(this->texture);
-    sprites.clear();
-}
-
-void Scene::load_texture(Render *render)
-{
-    this->texture = IMG_LoadTexture(render, this->file_name);
-    if (this->texture == nullptr)
+    if(this->texture != nullptr)
     {
-        SDL_Log("load texture failed: %s\n", SDL_GetError());
-        exit(1);
+        SDL_DestroyTexture(this->texture);
     }
+    sprites.clear();
 }
 
 void Scene::render(Render *render)
@@ -68,24 +53,86 @@ int Scene::get_sprite_id(Sprite* sprite)
     return -1;
 }
 
-void Scene::del_sprite(Sprite *sprite, int id)
+void Scene::del_sprite(Sprite *sprite)
 {
-    if (id != -1)
+    for (auto& s : this->sprites)
     {
-        this->sprites.erase(this->sprites.begin() + id);
-        return;
-    }
-    else if (sprite != nullptr)
-    {
-        for (auto& s : this->sprites)
+        if (s.second == sprite)
         {
-            if (s.second == sprite)
-            {
-                this->sprites.erase(this->sprites.begin() + s.first);
-                return;
-            }
+            this->sprites.erase(this->sprites.begin() + s.first);
+            return;
         }
     }
 }
 
+void Scene::del_sprite(int id)
+{
 
+        this->sprites.erase(this->sprites.begin() + id);
+}
+
+void Scene::del_sprite(const char* name)
+{
+    for (auto& s : this->sprites)
+    {
+        if (s.second->get_name() == name)
+        {
+            this->sprites.erase(this->sprites.begin() + s.first);
+            return;
+        }
+    }
+}
+
+void Scene::render_sprite(Render *render, Sprite *sprite)
+{
+    sprite->render(render);
+}
+
+void Scene::render_sprite(Render *render, int id)
+{
+    this->sprites[id].second->render(render);
+}
+
+void Scene::render_sprite(Render *render, const char* name)
+{
+    for (auto& s : this->sprites)
+    {
+        if (s.second->get_name() == name)
+        {
+            s.second->render(render);
+            return;
+        }
+    }
+}
+
+void Scene::load_sprite(Render *render)
+{
+    for (auto& sprite : this->sprites)
+    {
+        sprite.second->load_texture(render);
+    }
+}
+
+void Scene::load_sprite(Render *render, Sprite *sprite)
+{
+    sprite->load_texture(render);
+}
+
+void Scene::load_sprite(Render *render, int id)
+{
+    this->sprites[id].second->load_texture(render);
+}
+
+void Scene::load_sprite(Render *render, const char* name)
+{
+    for (auto& s : this->sprites)
+    {
+        if (s.second->get_name() == name)
+        {
+            s.second->load_texture(render);
+            return;
+        }
+    }
+}
+
+Scene::Scene(const char *file_name) : GameObject(file_name) {}

@@ -12,7 +12,6 @@
 class Sprite : public GameObject
 {
 public:
-    Sprite(const char *file_name, Render* render);
     ~Sprite();
 
     void render(Render* render);
@@ -24,11 +23,11 @@ public:
     void set_angle(double angle);
     void set_center(SDL_Point* center);
     void set_flip(uint8_t flip);
-
 private:
 
     double angle = 0;
     SDL_Point* center = nullptr;
     SDL_RendererFlip flip = SDL_FLIP_NONE;
 };
+
 #endif //LY_ENGINE_SPRITE_H

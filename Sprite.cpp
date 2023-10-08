@@ -4,12 +4,6 @@
 
 #include "Sprite.h"
 
-Sprite::Sprite(const char *file_name, Render *render)
-{
-    this->file_name = file_name;
-    this->texture = IMG_LoadTexture(render, file_name);
-}
-
 Sprite::~Sprite()
 {
     SDL_DestroyTexture(this->texture);
@@ -49,4 +43,3 @@ uint8_t Sprite::get_flip()
 {
     return this->flip;
 }
-
