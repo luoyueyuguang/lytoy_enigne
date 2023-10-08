@@ -22,14 +22,16 @@ void Scene::load_texture(Render *render)
     }
 }
 
-void Scene::render(Render *render) {
+void Scene::render(Render *render)
+{
     SDL_RenderCopy(render, this->texture, &this->src, &this->dst);
-
+    render_sprite(render);
 }
 
 void Scene::render(Render *render, double angle, SDL_Point *center, auto flip)
 {
     SDL_RenderCopyEx(render, this->texture, &this->src, &this->dst, angle, center, flip);
+    render_sprite(render);
 }
 
 void Scene::render_sprite(Render *render)

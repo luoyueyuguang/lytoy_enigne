@@ -18,6 +18,7 @@ using Color = SDL_Color;
 using Event = SDL_Event;
 using Point = SDL_Point;
 using RenderFLip = SDL_RendererFlip;
+using GameEvent = SDL_Event;
 
 
 #endif //LYTOY_ENIGNE_LYTOY_H

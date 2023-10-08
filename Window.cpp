@@ -10,9 +10,9 @@ flags(flags), width(width), height(height), x(x), y(y)
     window = SDL_CreateWindow(title, x, y, width, height, flags);
 }
 
-Render *Window::CreateRenderer()
+void Window::CreateRenderer()
 {
-    return SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+    this->render = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
 }
 
 void Window::set_x(int x)
@@ -99,8 +99,32 @@ void Window::set_scene(int id)
     {
         if (s.first == id)
         {
-            s.second->load_texture(this->CreateRenderer());
+            s.second->load_texture(render);
             return;
         }
     }
 }
+
+void Window::RenderClear()
+{
+    SDL_RenderClear(this->render);
+}
+
+void Window::RenderPresent()
+{
+    SDL_RenderPresent(this->render);
+}
+
+void Window::RenderScene(int id)
+{
+    for (auto& s : this->scenes)
+    {
+        if (s.first == id)
+        {
+            s.second->render(this->render);
+            return;
+        }
+    }
+
+}
+

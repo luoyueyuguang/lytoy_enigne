@@ -13,7 +13,10 @@ public:
     Window(const char* title, Uint32 flags,  int width, int height,
            int x = SDL_WINDOWPOS_CENTERED, int y = SDL_WINDOWPOS_CENTERED);
 
-    Render* CreateRenderer();
+    void CreateRenderer();
+    void RenderPresent();
+    void RenderClear();
+    void RenderScene(int id);
 
     void set_x(int x);
     void set_y(int y);
@@ -40,5 +43,6 @@ private:
     std::vector<std::pair<int, Scene*>> scenes = {};
 
     Win_dow* window = nullptr;
+    Render *render = nullptr;
 };
 #endif //LY_ENGINE_WINDOW_H

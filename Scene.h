@@ -35,6 +35,7 @@ private:
     Rect src = {0, 0, 0, 0};
 
     std::vector<std::pair<int, Sprite*>> sprites;
+    GameEvent event;
 };
 
 #endif //LYTOY_ENIGNE_SCENE_H

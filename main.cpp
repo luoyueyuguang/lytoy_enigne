@@ -10,14 +10,13 @@ int main()
 {
     int i = 100;
     Window window{"test", SDL_WINDOW_SHOWN, 980, 540};
-    Render* render = window.CreateRenderer();
+    window.CreateRenderer();
     Scene scene("../res/background.png", new Rect{0, 0, 1960, 1080},
                 new Rect{0, 0, 980, 540});
-    scene.load_texture(render);
-    Sprite enemy{"../res/enemy.png", render};
+    window.add_scene(&scene);
+    window.set_scene(0);
 
-    SDL_RenderClear(render);
-    scene.render(render);
-    SDL_RenderPresent(render);
-    SDL_Delay(1000);
+    window.RenderClear();
+    window.RenderScene(0);
+    window.RenderPresent();
 }
