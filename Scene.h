@@ -23,8 +23,8 @@ public:
     void render_sprite(Render* render);
 
     void add_sprite(Sprite* sprite);
-
-
+    int get_sprite_id(Sprite *sprite);
+    void del_sprite(Sprite* sprite = nullptr, int id = -1);
 
 private:
     const char* file_name = nullptr;
@@ -34,7 +34,7 @@ private:
     Rect dst = {0, 0, 0, 0};
     Rect src = {0, 0, 0, 0};
 
-    std::vector<Sprite*> sprites;
+    std::vector<std::pair<int, Sprite*>> sprites;
 };
 
 #endif //LYTOY_ENIGNE_SCENE_H

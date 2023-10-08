@@ -49,9 +49,7 @@ private:
     SDL_Point* center = nullptr;
     SDL_RendererFlip flip = SDL_FLIP_NONE;
 
-    template<typename T>
-    std::queue<Rect> animation;
+    //template<typename T>
+    //std::queue<Rect> animation;
 };
-
-
 #endif //LY_ENGINE_SPRITE_H

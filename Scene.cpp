@@ -34,15 +34,48 @@ void Scene::render(Render *render, double angle, SDL_Point *center, auto flip)
 
 void Scene::render_sprite(Render *render)
 {
-
-    for (auto sprite : this->sprites)
+    for (auto& sprite : this->sprites)
     {
-        sprite->render(render);
+        sprite.second->render(render);
     }
 }
 
-void Scene::add_sprite(Sprite *sprite)
+void Scene::add_sprite(Sprite* sprite)
 {
-    this->sprites.push_back(sprite);
+    static int id = 0;
+    this->sprites.emplace_back(id, sprite);
 }
+
+int Scene::get_sprite_id(Sprite* sprite)
+{
+    for (auto& s : this->sprites)
+    {
+        if (s.second == sprite)
+        {
+            return s.first;
+        }
+    }
+    return -1;
+}
+
+void Scene::del_sprite(Sprite *sprite, int id)
+{
+    if (id != -1)
+    {
+        this->sprites.erase(this->sprites.begin() + id);
+        return;
+    }
+    else if (sprite != nullptr)
+    {
+        for (auto& s : this->sprites)
+        {
+            if (s.second == sprite)
+            {
+                this->sprites.erase(this->sprites.begin() + s.first);
+                return;
+            }
+        }
+    }
+}
+
 
