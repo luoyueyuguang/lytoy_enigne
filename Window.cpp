@@ -170,3 +170,36 @@ Window::~Window()
     SDL_DestroyRenderer(this->render);
     SDL_Log("Delete window %s", this->file_name);
 }
+
+void Window::load_scene_true(Scene *scene) {
+    for (auto& s : this->scenes)
+    {
+        if (s.second == scene)
+        {
+            s.second->load_texture(this->render);
+            return;
+        }
+    }
+}
+
+void Window::load_scene_true(int id) {
+    for (auto& s : this->scenes)
+    {
+        if (s.first == id)
+        {
+            s.second->load_texture(this->render);
+            return;
+        }
+    }
+}
+
+void Window::load_scene_true(const char *name) {
+    for (auto& s : this->scenes)
+    {
+        if (s.second->get_name() == name)
+        {
+            s.second->load_texture(this->render);
+            return;
+        }
+    }
+}

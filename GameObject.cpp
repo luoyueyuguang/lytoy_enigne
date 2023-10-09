@@ -78,6 +78,7 @@ GameObject::~GameObject() {
 void GameObject::load_texture(Render *render)
 {
     this->texture = IMG_LoadTexture(render, this->file_name);
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 }
 
 void GameObject::set_alpha(uint8_t alpha)

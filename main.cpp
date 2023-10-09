@@ -43,7 +43,7 @@ int main()
     ui.set_src(0, 0, 1960, 1080);
 
     Button button(0, 0, 100, 100);
-    button.set_color(0xff, 0xff, 0xff, 0xff);
+    button.set_color(0x00, 0x00, 0x00, 0x00);
     ui.add_button(&button);
 
     window.add_scene(&ui);
@@ -54,6 +54,7 @@ int main()
     window.load_scene(1);
     SDL_Event event;
     int i = 0;
+
 
     scene.add_event(SDL_KEYDOWN, [&](){
         switch (event.key.keysym.sym)
@@ -84,6 +85,8 @@ int main()
         }
         return 0;
     });
+
+
 
     ui.add_event(SDL_MOUSEBUTTONDOWN, [&](){
         switch (event.button.button)
@@ -121,6 +124,7 @@ int main()
                     break;
             }
         }
+
         window.RenderClear();
         window.render_scene(i);
         ui.render_button(window.get_render());

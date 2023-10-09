@@ -27,6 +27,9 @@ public:
     void load_scene(int id);
     void load_scene(const char* name);
 
+    void load_scene_true(Scene* scene);
+    void load_scene_true(int id);
+    void load_scene_true(const char* name);
 
     void render_scene(int id);
     void render_scene(Scene* scene);

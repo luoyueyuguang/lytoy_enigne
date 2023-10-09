@@ -34,7 +34,7 @@ public:
     void render_button(Render* render);
 private:
     //std::vector<std::pair<int, Sprite*>> elements;
-    std::vector<std::pair<int, Button*>> buttons;
+    std::vector<std::pair<int, Sprite*>> buttons;
 };
 
 #endif //LY_ENGINE_UI_H
