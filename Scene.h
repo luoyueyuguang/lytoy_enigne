@@ -5,14 +5,13 @@
 #ifndef LYTOY_ENIGNE_SCENE_H
 #define LYTOY_ENIGNE_SCENE_H
 
-#include <vector>
 #include "defines.h"
 #include "Sprite.h"
 
 class Scene : public GameObject
 {
 public:
-    Scene(const char* file_name);
+    explicit Scene(const char* file_name);
 
     ~Scene();
 
@@ -38,7 +37,7 @@ public:
 private:
 
     std::vector<std::pair<int, Sprite*>> sprites;
-    GameEvent event;
+    //Event
 };
 
 #endif //LYTOY_ENIGNE_SCENE_H

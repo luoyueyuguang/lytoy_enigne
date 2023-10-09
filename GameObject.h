@@ -16,16 +16,25 @@ public:
     void set_dst(int x, int y, int w, int h);
     void set_src(int x, int y, int w, int h);
 
+    void set_dst(Rect dst);
+    void set_src(Rect src);
+
     int get_x();
     int get_y();
     int get_w();
     int get_h();
+    uint8_t get_alpha();
     const char* get_name();
 
     void set_x(int x);
     void set_y(int y);
     void set_w(int w);
     void set_h(int h);
+    void set_alpha(uint8_t alpha);
+
+    //void push_frames(int id, int x, int y, int w, int h);
+
+    //void del_animation(int id);
 protected:
     const char* file_name = nullptr;
 

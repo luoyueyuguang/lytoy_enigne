@@ -58,6 +58,7 @@ void Window::render_scene(int id)
         if (s.first == id)
         {
             s.second->render(this->render);
+            s.second->render_sprite(this->render);
             return;
         }
     }
@@ -77,8 +78,7 @@ int Window::add_scene(Scene *scene)
 {
     static int id = 0;
     scenes.emplace_back(id, scene);
-    id++;
-    return id - 1;
+    return id ++;
 }
 
 void Window::render_scene(Scene *scene)
@@ -88,6 +88,7 @@ void Window::render_scene(Scene *scene)
         if (s.second == scene)
         {
             s.second->render(this->render);
+            s.second->render_sprite(this->render);
             return;
         }
     }
@@ -100,6 +101,7 @@ void Window::render_scene(const char *name)
         if (s.second->get_name() == name)
         {
             s.second->render(this->render);
+            s.second->render_sprite(this->render);
             return;
         }
     }
@@ -112,9 +114,11 @@ void Window::load_scene(Scene *scene)
         if (s.second == scene)
         {
             s.second->load_texture(this->render);
+            s.second->load_sprite(this->render);
             return;
         }
     }
+    scene->load_sprite(this->render);
 }
 
 void Window::load_scene(int id)
@@ -124,6 +128,7 @@ void Window::load_scene(int id)
         if (s.first == id)
         {
             s.second->load_texture(this->render);
+            s.second->load_sprite(this->render);
             return;
         }
     }
@@ -136,7 +141,13 @@ void Window::load_scene(const char *name)
         if (s.second->get_name() == name)
         {
             s.second->load_texture(this->render);
+            s.second->load_sprite(this->render);
             return;
         }
     }
+}
+
+Render *Window::get_render()
+{
+    return this->render;
 }

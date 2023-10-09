@@ -31,14 +31,15 @@ void Scene::render_sprite(Render *render)
     {
         sprite.second->render(render);
     }
+    SDL_Log("Render sprite");
 }
 
 int Scene::add_sprite(Sprite* sprite)
 {
     static int id = 0;
     this->sprites.emplace_back(id, sprite);
-    id ++;
-    return id - 1;
+    SDL_Log("Add sprite %d", id);
+    return id++;
 }
 
 int Scene::get_sprite_id(Sprite* sprite)
@@ -60,6 +61,7 @@ void Scene::del_sprite(Sprite *sprite)
         if (s.second == sprite)
         {
             this->sprites.erase(this->sprites.begin() + s.first);
+            SDL_Log("Delete sprite %s", sprite->get_name());
             return;
         }
     }
@@ -67,8 +69,8 @@ void Scene::del_sprite(Sprite *sprite)
 
 void Scene::del_sprite(int id)
 {
-
         this->sprites.erase(this->sprites.begin() + id);
+        SDL_Log("Delete sprite %d", id);
 }
 
 void Scene::del_sprite(const char* name)
@@ -78,6 +80,7 @@ void Scene::del_sprite(const char* name)
         if (s.second->get_name() == name)
         {
             this->sprites.erase(this->sprites.begin() + s.first);
+            SDL_Log("Delete sprite %s", name);
             return;
         }
     }
@@ -86,11 +89,13 @@ void Scene::del_sprite(const char* name)
 void Scene::render_sprite(Render *render, Sprite *sprite)
 {
     sprite->render(render);
+    SDL_Log("Render sprite %s", sprite->get_name());
 }
 
 void Scene::render_sprite(Render *render, int id)
 {
     this->sprites[id].second->render(render);
+    SDL_Log("Render sprite %d", id);
 }
 
 void Scene::render_sprite(Render *render, const char* name)
@@ -135,4 +140,6 @@ void Scene::load_sprite(Render *render, const char* name)
     }
 }
 
-Scene::Scene(const char *file_name) : GameObject(file_name) {}
+Scene::Scene(const char *file_name) : GameObject(file_name)
+{
+}

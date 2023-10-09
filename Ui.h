@@ -5,7 +5,6 @@
 #ifndef LY_ENGINE_UI_H
 #define LY_ENGINE_UI_H
 
-#include <vector>
 #include "Sprite.h"
 #include "Scene.h"
 #include "Window.h"
@@ -21,6 +20,7 @@ public:
     int add_element(Sprite* sprite);
     int get_element_id(Sprite* sprite);
     void del_element(Sprite* sprite = nullptr, int id = -1);
+
 private:
     std::vector<std::pair<int, Sprite*>> elements;
 };

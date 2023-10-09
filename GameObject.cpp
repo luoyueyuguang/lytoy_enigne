@@ -4,6 +4,8 @@
 
 #include "GameObject.h"
 
+#include <utility>
+
 void GameObject::set_dst(int x, int y, int w, int h)
 {
     this->dst.x = x;
@@ -77,3 +79,59 @@ void GameObject::load_texture(Render *render)
 {
     this->texture = IMG_LoadTexture(render, this->file_name);
 }
+
+void GameObject::set_alpha(uint8_t alpha)
+{
+    SDL_SetTextureAlphaMod(this->texture, alpha);
+}
+
+uint8_t GameObject::get_alpha() {
+    uint8_t alpha;
+    SDL_GetTextureAlphaMod(this->texture, &alpha);
+    return alpha;
+}
+
+/*int GameObject::set_animation(int id, std::vector<Rect> frames)
+{
+    this->animations[id] = std::move(frames);
+    return id;
+}
+
+void GameObject::push_frames(int id, int x, int y, int w, int h)
+{
+    this->animations[id].push_back({x, y, w, h});
+}
+
+void GameObject::del_animation(int id) {
+    this->animations.erase(id);
+}
+
+int GameObject::set_animation(std::vector<Rect> frames) {
+    static int id = 0;
+    this->animations[id] = std::move(frames);
+    id++;
+    return id-1;
+}
+
+int GameObject::get_animation_size(int id)
+{
+    return this->animations[id].size();
+}
+
+std::vector<Rect> GameObject::get_animation(int id) {
+    return this->animations[id];
+}*/
+
+void GameObject::set_dst(Rect dst)
+{
+    this->dst = dst;
+}
+
+void GameObject::set_src(Rect src)
+{
+    this->src = src;
+}
+
+
+
+

@@ -30,6 +30,7 @@ public:
     void render_scene(Scene* scene);
     void render_scene(const char* name);
 
+    Render* get_render() ;
 private:
     int x;
     int y;
