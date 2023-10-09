@@ -13,6 +13,8 @@ public:
     Window(const char* title, Uint32 flags,  int width, int height,
            int x = SDL_WINDOWPOS_CENTERED, int y = SDL_WINDOWPOS_CENTERED);
 
+    ~Window();
+
     void CreateRenderer();
     void RenderPresent();
     void RenderClear();
@@ -31,12 +33,17 @@ public:
     void render_scene(const char* name);
 
     Render* get_render() ;
+
+    void set_running(bool is_running);
+    bool get_running();
 private:
     int x;
     int y;
     int width;
     int height;
     Uint32 flags = 0;
+
+    bool is_running = false;
 
     std::vector<std::pair<int, Scene*>> scenes = {};
 

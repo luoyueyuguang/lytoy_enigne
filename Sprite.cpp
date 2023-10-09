@@ -11,8 +11,8 @@ Sprite::~Sprite()
 
 void Sprite::render(Render *render)
 {
-    SDL_RenderCopyEx(render, this->texture, &this->src, &this->dst, this->angle, this->center, this->flip);
-    SDL_Log("Render sprite");
+    SDL_RenderCopyEx(render, this->texture, &this->src, &this->dst,
+                     this->angle, this->center, this->flip);
 }
 
 void Sprite::set_angle(double angle)

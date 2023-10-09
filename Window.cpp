@@ -13,6 +13,8 @@ Window::Window(const char* title, Uint32 flags, int width, int height, int x, in
     this->x = x;
     this->y = y;
     window = SDL_CreateWindow(this->file_name, this->x, this->y, this->width, this->height, this->flags);
+    is_running = true;
+    SDL_Log("Create window %s", this->file_name);
 }
 
 void Window::CreateRenderer()
@@ -150,4 +152,21 @@ void Window::load_scene(const char *name)
 Render *Window::get_render()
 {
     return this->render;
+}
+
+void Window::set_running(bool is_running)
+{
+    this->is_running = is_running;
+}
+
+bool Window::get_running()
+{
+    return this->is_running;
+}
+
+Window::~Window()
+{
+    SDL_DestroyWindow(this->window);
+    SDL_DestroyRenderer(this->render);
+    SDL_Log("Delete window %s", this->file_name);
 }

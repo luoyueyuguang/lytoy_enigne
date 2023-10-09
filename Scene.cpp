@@ -4,6 +4,8 @@
 
 #include "Scene.h"
 
+#include <utility>
+
 Scene::~Scene()
 {
     if(this->texture != nullptr)
@@ -31,7 +33,6 @@ void Scene::render_sprite(Render *render)
     {
         sprite.second->render(render);
     }
-    SDL_Log("Render sprite");
 }
 
 int Scene::add_sprite(Sprite* sprite)
@@ -140,6 +141,67 @@ void Scene::load_sprite(Render *render, const char* name)
     }
 }
 
-Scene::Scene(const char *file_name) : GameObject(file_name)
+Scene::Scene(const char *file_name) : GameObject(file_name){}
+
+void Scene::handle_event(GameEvent event)
 {
+    for (auto& e : this->event_lists)
+    {
+        if (e.first == event.type)
+        {
+            e.second();
+        }
+    }
+}
+
+void Scene::add_event(int id, std::function<void()> func)
+{
+    this->event_lists.emplace_back(id, func);
+}
+
+void Scene::del_event(int id)
+{
+    this->event_lists.erase(this->event_lists.begin() + id);
+}
+
+void Scene::change_event(int id, std::function<void()> func)
+{
+    this->event_lists[id].second = std::move(func);
+}
+
+void Scene::get_event(int id)
+{
+    this->event_lists[id].second();
+}
+
+void Scene::update()
+{
+    for (auto& func : this->update_lists)
+    {
+        func();
+    }
+}
+
+void Scene::add_update(std::function<void()> func)
+{
+    this->update_lists.emplace_back(func);
+    SDL_Log("Add update");
+}
+
+void Scene::del_update(int id)
+{
+    this->update_lists.erase(this->update_lists.begin() + id);
+    SDL_Log("Delete update %d", id);
+}
+
+void Scene::change_update(int id, std::function<void()> func)
+{
+    this->update_lists[id] = std::move(func);
+    SDL_Log("Change update %d", id);
+}
+
+void Scene::get_update(int id)
+{
+    this->update_lists[id]();
+    SDL_Log("Get update %d", id);
 }

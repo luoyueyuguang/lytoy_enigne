@@ -14,7 +14,7 @@ public:
     explicit Sprite(const char* file_name);
     ~Sprite();
 
-    void render(Render* render);
+    virtual void render(Render* render);
 
     double get_angle();
     SDL_Point* get_center();
@@ -28,9 +28,11 @@ public:
     int set_animation(std::vector<Rect> frames);
 
     int get_animation_size(int id);
-private:
-    int animation_id = 0;
     std::vector<Rect> get_animation(int id);
+
+protected:
+
+    int animation_id = 0;
 
     double angle = 0;
     SDL_Point* center = nullptr;
