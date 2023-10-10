@@ -109,6 +109,7 @@ int main()
             if(event.type == SDL_QUIT)
             {
                 window.set_running(false);
+                SDL_Quit();
                 return 0;
             }
             switch (i)
@@ -144,4 +145,10 @@ int main()
         //ui.render_button(window.get_render());
         window.RenderPresent();
     }
+
+    delete &window;
+    delete &scene;
+    delete &player;
+    delete &ui;
+    return 0;
 }

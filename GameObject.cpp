@@ -101,3 +101,8 @@ void GameObject::set_src(Rect src)
 {
     this->src = src;
 }
+
+SDL_Texture *GameObject::get_texture()
+{
+    return this->texture;
+}

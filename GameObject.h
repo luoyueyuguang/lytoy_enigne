@@ -32,9 +32,8 @@ public:
     void set_h(int h);
     void set_alpha(uint8_t alpha);
 
-    //void push_frames(int id, int x, int y, int w, int h);
+    SDL_Texture *get_texture();
 
-    //void del_animation(int id);
 protected:
     const char* file_name = nullptr;
 

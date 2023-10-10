@@ -4,8 +4,6 @@
 
 #include "Scene.h"
 
-#include <utility>
-
 Scene::~Scene()
 {
     if(this->texture != nullptr)
@@ -154,9 +152,10 @@ void Scene::handle_event(GameEvent event)
     }
 }
 
-void Scene::add_event(int id, const std::function<void()>& func)
+ull Scene::add_event(int id, const std::function<void()>& func)
 {
     this->event_lists.emplace_back(id, func);
+    return this->event_lists.size() - 1;
 }
 
 void Scene::del_event(int id)
@@ -169,7 +168,7 @@ void Scene::change_event(int id, std::function<void()> func)
     this->event_lists[id].second = std::move(func);
 }
 
-void Scene::get_event(int id)
+void Scene::set_event(int id)
 {
     this->event_lists[id].second();
 }
@@ -182,9 +181,10 @@ void Scene::update()
     }
 }
 
-void Scene::add_update(const std::function<void()>& func)
+ull Scene::add_update(const std::function<void()>& func)
 {
     this->update_lists.emplace_back(func);
+    return this->update_lists.size() - 1;
     SDL_Log("Add update");
 }
 
@@ -200,7 +200,7 @@ void Scene::change_update(int id, std::function<void()> func)
     SDL_Log("Change update %d", id);
 }
 
-void Scene::get_update(int id)
+void Scene::set_update(int id)
 {
     this->update_lists[id]();
     SDL_Log("Get update %d", id);

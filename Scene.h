@@ -36,16 +36,16 @@ public:
     void del_sprite(const char* name);
 
    void handle_event(GameEvent event);
-   void add_event(int id, const std::function<void()>& func);
+   ull add_event(int id, const std::function<void()>& func);
    void del_event(int id);
    void change_event(int id, std::function<void()> func);
-   void get_event(int id);
+   void set_event(int id);
 
    void update();
-   void add_update(const std::function<void()>& func);
+   ull add_update(const std::function<void()>& func);
    void del_update(int id);
    void change_update(int id, std::function<void()> func);
-   void get_update(int id);
+   void set_update(int id);
 protected:
     std::vector<std::pair<int, std::function<void()>>> event_lists;
     std::vector<std::pair<int, Sprite*>> sprites;

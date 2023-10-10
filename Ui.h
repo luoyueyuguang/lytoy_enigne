@@ -18,8 +18,8 @@ public:
     explicit UI(const char* file_name);
     ~UI();
     int add_button(Button* button);
-    int add_button(const char* name, int x, int y, int w, int h);
-    int add_button(const char* name, int radius, int centreX, int centreY,
+    ull add_button(const char* name, int x, int y, int w, int h);
+    ull add_button(const char* name, int radius, int centreX, int centreY,
                    uint8_t r = 0x00, uint8_t g = 0xff, uint8_t b = 0x00, uint8_t a = 0xff);
 
     void del_button(int id);

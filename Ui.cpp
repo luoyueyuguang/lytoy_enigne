@@ -24,9 +24,8 @@ void UI::render_circle(Render *render)
 {
     for (auto& s : this->buttons)
     {
-        s.second->renderCircle(render);
+        s.second->render_circle(render);
     }
-
 
 }
 
@@ -37,18 +36,15 @@ int UI::add_button(const char *name, int x, int y, int w, int h) {
     return id - 1;
 }
 
-int UI::add_button(Button *button) {
-    static int id = 0;
-    this->buttons.emplace_back(id, button);
-    id++;
-    return id - 1;
+ull UI::add_button(Button *button) {
+    this->buttons.emplace_back(buttons.size(), button);
+    return buttons.size() - 1;
 }
 
-int UI::add_button(const char *name, int radius, int centreX, int centreY, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-    static int id = 0;
-    this->buttons.emplace_back(id, new Button(radius, centreX, centreY, r, g, b, a));
-    id++;
-    return id - 1;
+ull UI::add_button(const char *name, int radius, int centreX, int centreY, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+{
+    this->buttons.emplace_back(buttons.size(), new Button(radius, centreX, centreY, r, g, b, a));
+    return buttons.size() - 1;
 }
 
 void UI::del_button(int id) {
