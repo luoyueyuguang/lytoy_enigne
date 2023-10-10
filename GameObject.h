@@ -19,10 +19,10 @@ public:
     void set_dst(Rect dst);
     void set_src(Rect src);
 
-    int get_x();
+    [[nodiscard]] int get_x() const;
     int get_y();
     int get_w();
-    int get_h();
+    [[nodiscard]] int get_h() const;
     uint8_t get_alpha();
     const char* get_name();
 

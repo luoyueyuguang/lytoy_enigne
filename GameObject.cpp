@@ -22,7 +22,7 @@ void GameObject::set_src(int x, int y, int w, int h)
     this->src.h = h;
 }
 
-int GameObject::get_x()
+int GameObject::get_x() const
 {
     return this->dst.x;
 }
@@ -37,7 +37,7 @@ int GameObject::get_w()
     return this->dst.w;
 }
 
-int GameObject::get_h()
+int GameObject::get_h() const
 {
     return this->dst.h;
 }

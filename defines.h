@@ -23,7 +23,8 @@ using MouseButtonEvent = SDL_MouseButtonEvent;
 using MouseMotionEvent = SDL_MouseMotionEvent;
 using MouseWheelEvent = SDL_MouseWheelEvent;
 using QuitEvent = SDL_QuitEvent;
-
+using ll = long long;
+using ull = unsigned long long;
 
 #include<queue>
 #include<vector>

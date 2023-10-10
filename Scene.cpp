@@ -154,7 +154,7 @@ void Scene::handle_event(GameEvent event)
     }
 }
 
-void Scene::add_event(int id, std::function<void()> func)
+void Scene::add_event(int id, const std::function<void()>& func)
 {
     this->event_lists.emplace_back(id, func);
 }
@@ -182,7 +182,7 @@ void Scene::update()
     }
 }
 
-void Scene::add_update(std::function<void()> func)
+void Scene::add_update(const std::function<void()>& func)
 {
     this->update_lists.emplace_back(func);
     SDL_Log("Add update");

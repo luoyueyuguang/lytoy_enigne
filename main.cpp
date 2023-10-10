@@ -127,7 +127,21 @@ int main()
 
         window.RenderClear();
         window.render_scene(i);
-        ui.render_button(window.get_render());
+        switch (i)
+        {
+            case 0: {
+                ui.render_button(window.get_render());
+                break;
+            }
+            case 1: {
+                //scene.render_sprite(window.get_render(), "player");
+                break;
+            }
+            default:
+                break;
+
+        }
+        //ui.render_button(window.get_render());
         window.RenderPresent();
     }
 }

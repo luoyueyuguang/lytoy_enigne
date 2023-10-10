@@ -16,7 +16,7 @@ public:
 
     virtual void render(Render* render);
 
-    double get_angle();
+    [[nodiscard]] double get_angle() const;
     SDL_Point* get_center();
     uint8_t get_flip();
 
@@ -27,7 +27,7 @@ public:
     int set_animation(int id, std::vector<Rect> frames);
     int set_animation(std::vector<Rect> frames);
 
-    int get_animation_size(int id);
+    ull get_animation_size(int id);
     std::vector<Rect> get_animation(int id);
 
 protected:
