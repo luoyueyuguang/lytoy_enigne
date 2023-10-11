@@ -14,12 +14,23 @@ Window::Window(const char* title, Uint32 flags, int width, int height, int x, in
     this->y = y;
     window = SDL_CreateWindow(this->file_name, this->x, this->y, this->width, this->height, this->flags);
     is_running = true;
+    if(window == nullptr)
+    {
+        SDL_Log("Create window failed: %s", SDL_GetError());
+        exit(1);
+    }
     SDL_Log("Create window %s", this->file_name);
 }
 
 void Window::CreateRenderer()
 {
     this->render = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+    if(this->render == nullptr)
+    {
+        SDL_Log("Create render failed: %s", SDL_GetError());
+        exit(1);
+    }
+    SDL_Log("Create render %s", this->file_name);
 }
 
 int Window::get_scene_id(Scene *scene) {
@@ -159,7 +170,7 @@ void Window::set_running(bool is_running)
     this->is_running = is_running;
 }
 
-bool Window::get_running()
+bool Window::get_running() const
 {
     return this->is_running;
 }

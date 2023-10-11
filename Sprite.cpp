@@ -51,7 +51,10 @@ uint8_t Sprite::get_flip()
     return this->flip;
 }
 
-Sprite::Sprite(const char *file_name) : GameObject(file_name) {}
+Sprite::Sprite(const char *file_name) : GameObject(file_name)
+{
+    SDL_Log("Create sprite %s", file_name);
+}
 
 int Sprite::set_animation(int id, std::vector<Rect> frames) {
     this->animations[id] = std::move(frames);

@@ -19,9 +19,12 @@ public:
     void set_dst(Rect dst);
     void set_src(Rect src);
 
+    Rect & get_dst();
+    Rect & get_src();
+
     [[nodiscard]] int get_x() const;
-    int get_y();
-    int get_w();
+    [[nodiscard]] int get_y() const;
+    [[nodiscard]] int get_w() const;
     [[nodiscard]] int get_h() const;
     uint8_t get_alpha();
     const char* get_name();
@@ -31,6 +34,18 @@ public:
     void set_w(int w);
     void set_h(int h);
     void set_alpha(uint8_t alpha);
+
+    void set_src_x(int x);
+    void set_src_y(int y);
+    void set_src_w(int w);
+    void set_src_h(int h);
+
+    [[nodiscard]] int get_src_x() const;
+    [[nodiscard]] int get_src_y() const;
+    [[nodiscard]] int get_src_w() const;
+    [[nodiscard]] int get_src_h() const;
+
+    void set_name(const char* name);
 
     SDL_Texture *get_texture();
 

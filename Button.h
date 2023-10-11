@@ -12,13 +12,13 @@ class Button: virtual public Sprite
 {
 public:
     void render(Render *render) override;
-    static void render_circle(Render *render, int radius, int centreX, int centreY,
-                      uint8_t r = 0x00, uint8_t g = 0xff, uint8_t b = 0x00, uint8_t a = 0xff);
+
     void render_circle(Render *render) const;
+    void render_rect(Render *render) const;
+    void render_sprite(Render *render) const;
 
     explicit Button(const char *fileName);
-    Button(int radius, int centreX, int centreY, uint8_t r, uint8_t g, uint8_t b,
-           uint8_t a);
+    Button(int radius, int centreX, int centreY);
     Button(int x, int y, int w, int h);
 
     void set_clicked(bool isClicked);
@@ -38,9 +38,19 @@ public:
 
     void set_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
-protected:
+    [[nodiscard]] bool is_rect_button() const;
+    [[nodiscard]] bool is_circle_button() const;
+    [[nodiscard]] bool is_sprite_button() const;
+
+    void on_click(GameEvent event, const std::function<void()> &func);
+
+private:
     bool is_clicked = false;
     uint8_t r = 0x00, g = 0xff, b = 0x00, a = 0xff;
+
+    bool is_rect = false;
+    bool is_circle = false;
+    bool is_sprite = false;
 
     CircleButton* circle_button = nullptr;
 };

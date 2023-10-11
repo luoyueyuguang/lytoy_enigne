@@ -9,18 +9,15 @@
 #include "Scene.h"
 #include "Button.h"
 
-
-
-
-class UI : public Scene {
+class UI : virtual public Scene
+{
 public:
-
     explicit UI(const char* file_name);
     ~UI();
-    int add_button(Button* button);
-    ull add_button(const char* name, int x, int y, int w, int h);
-    ull add_button(const char* name, int radius, int centreX, int centreY,
-                   uint8_t r = 0x00, uint8_t g = 0xff, uint8_t b = 0x00, uint8_t a = 0xff);
+    ull add_button(Button* button);
+    ull add_button(int x, int y, int w, int h);
+    ull add_button(int radius, int centreX, int centreY);
+    ull add_button(const char* name);
 
     void del_button(int id);
     void del_button(Button* button);
@@ -30,11 +27,30 @@ public:
     void change_button(Button* button1, Button* button2);
     void change_button(const char* name, Button* button);
 
-    void render_circle(Render* render);
-    void render_button(Render* render);
+    void render_sprite(Render* render) override;
+    void render_button(Render* render, Button* button);
+    void render_button(Render* render, int id);
+
+    [[maybe_unused]] void render_button(Render* render, const char* name);
+    void render_button(Render *render);
+
+    void load_sprite(Render *render) override;
+    //static void on_click(Button *b, GameEvent event, const std::function<void()> &func);
+
 private:
-    //std::vector<std::pair<int, Sprite*>> elements;
     std::vector<std::pair<int, Button*>> buttons;
+
+    //不允许被UI类调用
+    void render_sprite(Render* render, Sprite* sprite) override;
+    void render_sprite(Render* render, int id) override ;
+    void render_sprite(Render* render, const char* name) override;
+
+    int add_sprite(Sprite* sprite) override;
+    int get_sprite_id(Sprite *sprite) override;
+
+    void del_sprite(Sprite* sprite) override ;
+    void del_sprite(int id) override;
+    void del_sprite(const char* name) override;
 };
 
 #endif //LY_ENGINE_UI_H

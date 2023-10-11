@@ -4,8 +4,6 @@
 
 #include "GameObject.h"
 
-#include <utility>
-
 void GameObject::set_dst(int x, int y, int w, int h)
 {
     this->dst.x = x;
@@ -27,12 +25,12 @@ int GameObject::get_x() const
     return this->dst.x;
 }
 
-int GameObject::get_y()
+int GameObject::get_y() const
 {
     return this->dst.y;
 }
 
-int GameObject::get_w()
+int GameObject::get_w() const
 {
     return this->dst.w;
 }
@@ -105,4 +103,59 @@ void GameObject::set_src(Rect src)
 SDL_Texture *GameObject::get_texture()
 {
     return this->texture;
+}
+
+void GameObject::set_name(const char *name)
+{
+    this->file_name = name;
+}
+
+void GameObject::set_src_x(int x)
+{
+    this->src.x = x;
+}
+
+void GameObject::set_src_y(int y)
+{
+    this->src.y = y;
+}
+
+void GameObject::set_src_w(int w)
+{
+    this->src.w = w;
+}
+
+void GameObject::set_src_h(int h)
+{
+    this->src.h = h;
+}
+
+int GameObject::get_src_x() const
+{
+    return this->src.x;
+}
+
+int GameObject::get_src_y() const
+{
+    return this->src.y;
+}
+
+int GameObject::get_src_w() const
+{
+    return this->src.w;
+}
+
+int GameObject::get_src_h() const
+{
+    return this->src.h;
+}
+
+Rect & GameObject::get_dst()
+{
+    return this->dst;
+}
+
+Rect & GameObject::get_src()
+{
+    return this->src;
 }

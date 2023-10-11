@@ -5,8 +5,7 @@
 #ifndef LY_ENGINE_BOX_H
 #define LY_ENGINE_BOX_H
 
-#include "defines.h"
-#include "GameObject.h"
+#include  "defines.h"
 #include "Button.h"
 #include "Window.h"
 
@@ -23,7 +22,7 @@ public:
 
     static uint32_t check_collision(GameObject* obj1, const std::vector<GameObject*>& objs, std::vector<uint32_t>& ids);
     static uint32_t check_collision(const std::vector<GameObject*>& objs, const std::vector <GameObject*>& objs2,
-                             std::vector<std::pair<uint32_t, uint32_t>>& ids1);
+                             std::vector<std::pair<uint32_t, uint32_t>>& ids);
 
     bool check_pixel_collision(GameObject* obj1, GameObject* obj2);
 

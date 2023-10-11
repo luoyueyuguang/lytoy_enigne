@@ -5,7 +5,6 @@
 #ifndef LY_ENGINE_CIRCLEBUTTON_H
 #define LY_ENGINE_CIRCLEBUTTON_H
 
-#include "Button.h"
 #include "defines.h"
 
 class CircleButton
@@ -13,13 +12,13 @@ class CircleButton
 public:
     CircleButton(int radius, int centreX, int centreY);
     void set_radius(int radius);
-    int get_radius();
+    [[nodiscard]] int get_radius() const;
 
     void set_centreX(int centreX);
-    int get_centreX();
+    [[nodiscard]] int get_centreX() const;
 
     void set_centreY(int centreY);
-    int get_centreY();
+    [[nodiscard]] int get_centreY() const;
     void set_circle(int radius, int centreX, int centreY);
 
     static void render_circle(Render *render, int radius, int centreX, int centreY);
@@ -28,6 +27,5 @@ private:
     int centreX = 0;
     int centreY = 0;
 };
-
 
 #endif //LY_ENGINE_CIRCLEBUTTON_H

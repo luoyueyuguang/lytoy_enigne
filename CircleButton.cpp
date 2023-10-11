@@ -4,12 +4,19 @@
 
 #include "CircleButton.h"
 
+CircleButton::CircleButton(int radius, int centreX, int centreY)
+{
+    this->radius = radius;
+    this->centreX = centreX;
+    this->centreY = centreY;
+}
+
 void CircleButton::set_radius(int radius)
 {
     this->radius = radius;
 }
 
-int CircleButton::get_radius()
+int CircleButton::get_radius() const
 {
     return this->radius;
 }
@@ -19,7 +26,7 @@ void CircleButton::set_centreX(int centreX)
     this->centreX = centreX;
 }
 
-int CircleButton::get_centreX()
+int CircleButton::get_centreX() const
 {
     return this->centreX;
 }
@@ -29,7 +36,7 @@ void CircleButton::set_centreY(int centreY)
     this->centreY = centreY;
 }
 
-int CircleButton::get_centreY()
+int CircleButton::get_centreY() const
 {
     return this->centreY;
 }
@@ -40,47 +47,35 @@ void CircleButton::set_circle(int radius, int centreX, int centreY) {
     this->centreY = centreY;
 }
 
-void
-CircleButton::render_circle(Render *render, int radius, int centreX, int centreY)
+//参考了https://gist.github.com/Gumichan01/332c26f6197a432db91cc4327fcabb1c
+void CircleButton::render_circle(Render *render, int radius, int centreX, int centreY)
 {
-    const int diameter = (radius * 2);
+    int offsetx, offsety, d;
 
-    int32_t x = (radius - 1);
-    int32_t y = 0;
-    int32_t tx = 1;
-    int32_t ty = 1;
-    int32_t error = (tx - diameter);
+    offsetx = 0;
+    offsety = radius;
+    d = radius -1;
 
-    while (x >= y)
-    {
-        SDL_RenderDrawPoint(render, centreX + x, centreY - y);
-        SDL_RenderDrawPoint(render, centreX + x, centreY + y);
-        SDL_RenderDrawPoint(render, centreX - x, centreY - y);
-        SDL_RenderDrawPoint(render, centreX - x, centreY + y);
-        SDL_RenderDrawPoint(render, centreX + y, centreY - x);
-        SDL_RenderDrawPoint(render, centreX + y, centreY + x);
-        SDL_RenderDrawPoint(render, centreX - y, centreY - x);
-        SDL_RenderDrawPoint(render, centreX - y, centreY + x);
+    while (offsety >= offsetx) {
 
-        if (error <= 0)
-        {
-            ++y;
-            error += ty;
-            ty += 2;
+        SDL_RenderDrawLine(render, centreX - offsety, centreY + offsetx, centreX + offsety, centreY + offsetx);
+        SDL_RenderDrawLine(render, centreX - offsetx, centreY + offsety, centreX + offsetx, centreY + offsety);
+        SDL_RenderDrawLine(render, centreX - offsetx, centreY - offsety, centreX + offsetx, centreY - offsety);
+        SDL_RenderDrawLine(render, centreX - offsety, centreY - offsetx, centreX + offsety, centreY - offsetx);
+
+        if (d >= 2*offsetx) {
+            d -= 2*offsetx + 1;
+            offsetx +=1;
         }
-
-        if (error > 0)
-        {
-            --x;
-            tx += 2;
-            error += (tx - diameter);
+        else if (d < 2 * (radius - offsety)) {
+            d += 2 * offsety - 1;
+            offsety -= 1;
+        }
+        else {
+            d += 2 * (offsety - offsetx - 1);
+            offsety -= 1;
+            offsetx += 1;
         }
     }
-}
-
-CircleButton::CircleButton(int radius, int centreX, int centreY)
-{
-    this->radius = radius;
-    this->centreX = centreX;
-    this->centreY = centreY;
+    SDL_Log("Render fill circle");
 }

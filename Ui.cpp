@@ -7,44 +7,16 @@
 UI::~UI()
 {
     SDL_DestroyTexture(this->texture);
-    sprites.clear();
+    buttons.clear();
 }
 
 UI::UI(const char *file_name) : Scene(file_name) {}
 
-
-
-void UI::render_button(Render *render) {
+void UI::render_button(Render *render)
+{
     for (auto& s : this->buttons) {
         s.second->render(render);
     }
-}
-
-void UI::render_circle(Render *render)
-{
-    for (auto& s : this->buttons)
-    {
-        s.second->render_circle(render);
-    }
-
-}
-
-int UI::add_button(const char *name, int x, int y, int w, int h) {
-    static int id = 0;
-    this->sprites.emplace_back(id, new Button(x, y, w, h));
-    id++;
-    return id - 1;
-}
-
-ull UI::add_button(Button *button) {
-    this->buttons.emplace_back(buttons.size(), button);
-    return buttons.size() - 1;
-}
-
-ull UI::add_button(const char *name, int radius, int centreX, int centreY, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
-{
-    this->buttons.emplace_back(buttons.size(), new Button(radius, centreX, centreY, r, g, b, a));
-    return buttons.size() - 1;
 }
 
 void UI::del_button(int id) {
@@ -75,7 +47,8 @@ void UI::del_button(const char *name) {
     }
 }
 
-void UI::change_button(int id, Button *button) {
+void UI::change_button(int id, Button *button)
+{
     this->buttons[id].second = button;
 }
 
@@ -100,3 +73,82 @@ void UI::change_button(const char *name, Button *button) {
         }
     }
 }
+
+ull UI::add_button(Button *button)
+{
+    this->buttons.emplace_back(this->buttons.size(), button);
+    return this->buttons.size() - 1;
+}
+
+ull UI::add_button(int x, int y, int w, int h)
+{
+    this->buttons.emplace_back(this->buttons.size(), new Button(x, y, w, h));
+    return this->buttons.size() - 1;
+}
+
+ull UI::add_button(int radius, int centreX, int centreY)
+{
+    this->buttons.emplace_back(this->buttons.size(), new Button(radius, centreX, centreY));
+    return this->buttons.size() - 1;
+}
+
+ull UI::add_button(const char *name)
+{
+    this->buttons.emplace_back(this->buttons.size(), new Button(name));
+    return this->buttons.size() - 1;
+}
+
+void UI::render_button(Render* render, Button *button)
+{
+    for(auto& s : this->buttons)
+    {
+        if(s.second == button)
+        {
+            s.second->render(render);
+            return;
+        }
+    }
+}
+
+void UI::render_button(Render *render, int id)
+{
+    this->buttons[id].second->render(render);
+}
+
+[[maybe_unused]] void UI::render_button(Render *render, const char *name)
+{
+    for(auto& s : this->buttons)
+    {
+        if(s.second->get_name() == name)
+        {
+            s.second->render(render);
+            return;
+        }
+    }
+}
+
+void UI::render_sprite(Render *render)
+{
+    for (auto& s : this->buttons)
+    {
+        s.second->render(render);
+    }
+}
+
+void UI::load_sprite(Render *render)
+{
+    for (auto& s : this->buttons)
+    {
+        s.second->load_texture(render);
+    }
+}
+
+//不允许被UI调用
+void UI::render_sprite(Render *render, Sprite *sprite) {}
+void UI::render_sprite(Render *render, int id) {}
+void UI::render_sprite(Render *render, const char *name) {}
+int UI::add_sprite(Sprite *sprite) {}
+int UI::get_sprite_id(Sprite *sprite) {}
+void UI::del_sprite(Sprite *sprite) {}
+void UI::del_sprite(int id) {}
+void UI::del_sprite(const char *name) {}

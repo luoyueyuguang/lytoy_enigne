@@ -49,7 +49,7 @@ uint32_t Box::check_collision(GameObject *obj1, const std::vector<GameObject *> 
 }
 
 uint32_t Box::check_collision(const std::vector<GameObject *> &objs, const std::vector<GameObject *> &objs2,
-                              std::vector<std::pair<uint32_t, uint32_t>> &ids1)
+                              std::vector<std::pair<uint32_t, uint32_t>> &ids)
 {
 
     uint32_t sum = 0;
@@ -57,7 +57,7 @@ uint32_t Box::check_collision(const std::vector<GameObject *> &objs, const std::
         for (size_t j = 0; j < objs2.size(); ++j) {
             if (check_collision(objs[i], objs2[j]))
             {
-                ids1.emplace_back(i, j);
+                ids.emplace_back(i, j);
                      sum++;
             }
         }

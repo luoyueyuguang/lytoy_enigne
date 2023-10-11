@@ -139,7 +139,10 @@ void Scene::load_sprite(Render *render, const char* name)
     }
 }
 
-Scene::Scene(const char *file_name) : GameObject(file_name){}
+Scene::Scene(const char *file_name) : GameObject(file_name)
+{
+    SDL_Log("Create scene %s", file_name);
+}
 
 void Scene::handle_event(GameEvent event)
 {

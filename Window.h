@@ -38,17 +38,17 @@ public:
     Render* get_render() ;
 
     void set_running(bool is_running);
-    bool get_running();
+    [[nodiscard]] bool get_running() const;
 private:
-    int x;
-    int y;
+    int x = SDL_WINDOWPOS_CENTERED;
+    int y = SDL_WINDOWPOS_CENTERED;
     int width;
     int height;
-    Uint32 flags = 0;
+    Uint32 flags = -1;
 
     bool is_running = false;
 
-    std::vector<std::pair<int, Scene*>> scenes = {};
+    std::vector<std::pair<int, Scene*>> scenes;
 
     Win_dow* window = nullptr;
     Render *render = nullptr;
