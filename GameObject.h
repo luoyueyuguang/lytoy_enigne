@@ -11,7 +11,8 @@ class GameObject
 {
 public:
     explicit GameObject(const char* file_name);
-    void load_texture(Render* render);
+
+    virtual void load_texture(Render* render);
     ~GameObject();
     void set_dst(int x, int y, int w, int h);
     void set_src(int x, int y, int w, int h);
@@ -57,6 +58,5 @@ protected:
     Rect dst = {0, 0, 0, 0};
     Rect src = {0, 0, 0, 0};
 };
-
 
 #endif //LY_ENGINE_GAMEOBJECT_H

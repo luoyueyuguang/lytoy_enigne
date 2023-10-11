@@ -45,7 +45,7 @@ private:
     void render_sprite(Render* render, int id) override ;
     void render_sprite(Render* render, const char* name) override;
 
-    int add_sprite(Sprite* sprite) override;
+    ull add_sprite(Sprite* sprite) override;
     int get_sprite_id(Sprite *sprite) override;
 
     void del_sprite(Sprite* sprite) override ;

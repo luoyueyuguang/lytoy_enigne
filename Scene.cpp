@@ -33,12 +33,11 @@ void Scene::render_sprite(Render *render)
     }
 }
 
-int Scene::add_sprite(Sprite* sprite)
+ull Scene::add_sprite(Sprite* sprite)
 {
-    static int id = 0;
-    this->sprites.emplace_back(id, sprite);
-    SDL_Log("Add sprite %d", id);
-    return id++;
+    this->sprites.emplace_back(this->sprites.size(), sprite);
+    SDL_Log("Add sprite %s", sprite->get_name());
+    return this->sprites.size() - 1;
 }
 
 int Scene::get_sprite_id(Sprite* sprite)

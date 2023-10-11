@@ -37,5 +37,4 @@ private:
     int  DISTANCE_THRESHOLD= 10;
 };
 
-
 #endif //LY_ENGINE_BOX_H

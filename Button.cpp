@@ -21,9 +21,22 @@ Button::Button(int x, int y, int w, int h) : Sprite(nullptr)
 Button::Button(int radius, int centreX, int centreY) : Sprite(nullptr)
 {
     this->circle_button = new CircleButton(radius, centreX, centreY);
+    if(!this->circle_button)
+    {
+        SDL_Log("Button: new CircleButton failed");
+    }
     is_circle = true;
 }
 
+Button::Button(const char *text, const char *font_name, int font_size, SDL_Color color)
+        : Sprite(nullptr) {
+    this->text = new Text(text, font_name, font_size, color);
+    if(!this->text)
+    {
+        SDL_Log("Button: new Text failed");
+    }
+    is_text = true;
+}
 
 bool Button::get_clicked() const
 {
@@ -35,57 +48,12 @@ void Button::set_clicked(bool isClicked)
     this->is_clicked = isClicked;
 }
 
-void Button::set_r(uint8_t r)
-{
-    this->r = r;
-}
-
-uint8_t Button::get_r() const
-{
-    return this->r;
-}
-
-void Button::set_g(uint8_t g)
-{
-    this->g = g;
-}
-
-uint8_t Button::get_g() const
-{
-    return this->g;
-}
-
-void Button::set_b(uint8_t b)
-{
-    this->b = b;
-}
-
-uint8_t Button::get_b() const
-{
-    return this->b;
-}
-
-void Button::set_a(uint8_t a)
-{
-    this->a = a;
-}
-
-uint8_t Button::get_a() const {
-    return this->a;
-}
-
-void Button::set_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
-{
-    this->r = r;
-    this->g = g;
-    this->b = b;
-    this->a = a;
-}
 
 void Button::render_circle(Render *render) const
 {
-    if(!is_circle)
+    if(!is_circle||!this->circle_button)
     {
+        SDL_Log("Button: render_circle failed");
         return;
     }
     SDL_SetRenderDrawColor(render, r, g, b, a);
@@ -104,7 +72,28 @@ void Button::render_rect(Render *render) const
 
 void Button::render_sprite(Render *render) const
 {
+    if(!is_sprite)
+    {
+        SDL_Log("Button: render_sprite failed");
+        return;
+    }
     SDL_RenderCopy(render, this->texture, &this->src, &this->dst);
+}
+
+void Button::render_text(Render *render) const
+{
+    if(!is_text||!this->text)
+    {
+        SDL_Log("Button: render_text failed");
+        return;
+    }
+    this->text->set_dst(this->dst);
+    this->text->set_x(this->dst.x);
+    this->text->set_y(this->dst.y);
+    this->text->set_w(this->dst.w);
+    this->text->set_h(this->dst.h);
+
+    this->text->render(render);
 }
 
 void Button::render(Render *render)
@@ -120,6 +109,10 @@ void Button::render(Render *render)
     if(is_sprite)
     {
         render_sprite(render);
+    }
+    if(is_text)
+    {
+        render_text(render);
     }
 }
 
@@ -138,13 +131,26 @@ bool Button::is_sprite_button() const
     return is_sprite;
 }
 
-void Button::on_click(GameEvent event, const std::function<void()> &func) {
+bool Button::is_text_button() const
+{
+    return is_text;
+}
+
+void Button::on_click(GameEvent event, const std::function<void()> &func)
+{
     if(event.type == SDL_MOUSEBUTTONDOWN) {
         if (event.button.button) {
             int x = event.motion.x;
             int y = event.motion.y;
+            SDL_Log("Button: on_click %d %d", x, y);
             SDL_Point p = {x, y};
-            if (SDL_PointInRect(&p, &this->dst))
+            auto rect = this->dst;
+            if(is_text)
+            {
+                rect = this->text->get_text_rect();
+                SDL_Log("Button: on_click text %d %d %d %d", rect.x, rect.y, rect.w, rect.h);
+            }
+            if (SDL_PointInRect(&p, &rect))
             {
                 func();
                 return;
@@ -161,5 +167,16 @@ void Button::on_click(GameEvent event, const std::function<void()> &func) {
             }
         }
     }
+}
 
+void Button::load_texture(Render *render)
+{
+    if(is_sprite)
+    {
+        Sprite::load_texture(render);
+    }
+    if(is_text)
+    {
+        this->text->load_texture(render);
+    }
 }

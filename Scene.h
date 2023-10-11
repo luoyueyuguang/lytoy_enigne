@@ -29,14 +29,14 @@ public:
     virtual void render_sprite(Render* render, int id);
     virtual void render_sprite(Render* render, const char* name);
 
-    virtual int add_sprite(Sprite* sprite);
+    virtual ull add_sprite(Sprite* sprite);
     virtual int get_sprite_id(Sprite *sprite);
 
     virtual void del_sprite(Sprite* sprite);
     virtual void del_sprite(int id);
     virtual void del_sprite(const char* name);
 
-    void handle_event(GameEvent event);
+    virtual void handle_event(GameEvent event);
     ull add_event(int id, const std::function<void()>& func);
     void del_event(int id);
     void change_event(int id, std::function<void()> func);

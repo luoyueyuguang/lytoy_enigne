@@ -16,20 +16,42 @@ public:
 
     virtual void render(Render* render);
 
-    [[nodiscard]] double get_angle() const;
-    SDL_Point* get_center();
-    uint8_t get_flip();
+    [[nodiscard]] virtual double get_angle() const;
 
-    void set_angle(double angle);
-    void set_center(SDL_Point* center);
-    void set_flip(uint8_t flip);
+    virtual SDL_Point* get_center();
 
-    int set_animation(int id, std::vector<Rect> frames);
-    int set_animation(std::vector<Rect> frames);
+    virtual uint8_t get_flip();
 
-    ull get_animation_size(int id);
-    std::vector<Rect> get_animation(int id);
+    virtual void set_angle(double angle);
 
+    virtual void set_center(SDL_Point* center);
+
+    virtual void set_flip(uint8_t flip);
+
+    virtual int set_animation(int id, std::vector<Rect> frames);
+
+    virtual int set_animation(std::vector<Rect> frames);
+
+    virtual ull get_animation_size(int id);
+
+    virtual std::vector<Rect> get_animation(int id);
+
+    void set_r(uint8_t r);
+    [[nodiscard]] uint8_t get_r() const;
+
+    void set_g(uint8_t g);
+    [[nodiscard]] uint8_t get_g() const;
+
+    void set_b(uint8_t b);
+    [[nodiscard]] uint8_t get_b() const;
+
+    void set_a(uint8_t a);
+    [[nodiscard]] uint8_t get_a() const;
+
+    void set_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+    void set_color(uint32_t hex);
+
+    [[nodiscard]] virtual uint32_t get_color() const;
 protected:
 
     int animation_id = 0;
@@ -39,6 +61,8 @@ protected:
     SDL_RendererFlip flip = SDL_FLIP_NONE;
 
     std::map<int, std::vector<Rect>> animations;
+
+    uint8_t r = 0x00, g = 0xff, b = 0x00, a = 0xff;
 };
 
 #endif //LY_ENGINE_SPRITE_H

@@ -53,4 +53,5 @@ private:
     Win_dow* window = nullptr;
     Render *render = nullptr;
 };
+
 #endif //LY_ENGINE_WINDOW_H

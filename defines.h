@@ -4,10 +4,25 @@
 
 #ifndef LYTOY_ENIGNE_LYTOY_H
 #define LYTOY_ENIGNE_LYTOY_H
-#include <SDL2/SDL.h>
+/*#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_test_images.h>
 #include <SDL2/SDL_blendmode.h>
+#include <SDL2/SDL_ttf.h>
+//#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_version.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_FontCache.h>*/
+
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_test_images.h>
+#include <SDL_blendmode.h>
+#include <SDL_ttf.h>
+//#include <SDL_mixer.h>
+#include <SDL_version.h>
+#include <SDL_render.h>
+#include <SDL_FontCache.h>
 
 using Rect = SDL_Rect;
 using Render = SDL_Renderer;
@@ -25,6 +40,16 @@ using MouseWheelEvent = SDL_MouseWheelEvent;
 using QuitEvent = SDL_QuitEvent;
 using ll = long long;
 using ull = unsigned long long;
+
+#include<vector>
+#include<map>
+#include<string>
+#include<utility>
+#include<functional>
+#include<array>
+#include <valarray>
+
+#endif //LYTOY_ENIGNE_LYTOY_H
 
 /*int RenderDrawCircle(SDL_Renderer * renderer, int x, int y, int radius)
 {
@@ -68,13 +93,3 @@ using ull = unsigned long long;
 
     return status;
 }*/
-
-#include<vector>
-#include<map>
-#include<string>
-#include<utility>
-#include<functional>
-#include<array>
-#include <valarray>
-
-#endif //LYTOY_ENIGNE_LYTOY_H

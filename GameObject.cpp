@@ -60,11 +60,13 @@ void GameObject::set_h(int h)
     this->dst.h = h;
 }
 
-const char *GameObject::get_name() {
+const char *GameObject::get_name()
+{
     return this->file_name;
 }
 
-GameObject::~GameObject() {
+GameObject::~GameObject()
+{
     SDL_DestroyTexture(this->texture);
 }
 

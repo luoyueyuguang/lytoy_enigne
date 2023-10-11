@@ -147,8 +147,8 @@ void UI::load_sprite(Render *render)
 void UI::render_sprite(Render *render, Sprite *sprite) {}
 void UI::render_sprite(Render *render, int id) {}
 void UI::render_sprite(Render *render, const char *name) {}
-int UI::add_sprite(Sprite *sprite) {}
-int UI::get_sprite_id(Sprite *sprite) {}
+ull UI::add_sprite(Sprite *sprite) { return 0;}
+int UI::get_sprite_id(Sprite *sprite) { return 0;}
 void UI::del_sprite(Sprite *sprite) {}
 void UI::del_sprite(int id) {}
 void UI::del_sprite(const char *name) {}

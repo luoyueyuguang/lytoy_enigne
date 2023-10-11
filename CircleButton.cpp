@@ -77,5 +77,4 @@ void CircleButton::render_circle(Render *render, int radius, int centreX, int ce
             offsetx += 1;
         }
     }
-    SDL_Log("Render fill circle");
 }
