@@ -14,6 +14,7 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_FontCache.h>*/
 
+extern "C" {
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_test_images.h>
@@ -23,6 +24,7 @@
 #include <SDL_version.h>
 #include <SDL_render.h>
 #include <SDL_FontCache.h>
+}
 
 using Rect = SDL_Rect;
 using Render = SDL_Renderer;

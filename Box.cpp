@@ -30,10 +30,13 @@ bool Box::check_collision(int x1, int y1, int w1, int h1, int x2, int y2, int w2
     return x && y;
 }
 
-bool Box::check_collision(GameObject *obj1, const std::vector<GameObject *>& objs) {
-    std::ranges::any_of(objs, [obj1](GameObject* obj2){
+bool Box::check_collision(GameObject *obj1, const std::vector<GameObject *>& objs)
+{
+    std::ranges::any_of
+    (objs, [obj1](GameObject* obj2){
         return check_collision(obj1, obj2);
     });
+    return false;
 }
 
 uint32_t Box::check_collision(GameObject *obj1, const std::vector<GameObject *> &objs, std::vector<uint32_t> &ids)
@@ -82,13 +85,11 @@ bool Box::check_pixel_collision(GameObject *obj1, GameObject *obj2)
         for(auto x1 = 0; x1 < w1; x1++)
         {
             auto pixel1 = pixels1[y1*w1 + x1];
-
             for(auto y2=0; y2 < h2; y2++)
             {
                 for(auto x2=0; x2 < w2; x2++)
                 {
-                    auto pixel2 = pixels2[y2*w2 + x2];
-
+                    auto pixel2 = pixels2[y2 * w2 + x2];
                     int r1 = static_cast<int>((pixel1 >> 24) & 0xff);
                     int g1 = static_cast<int>((pixel1 >> 16) & 0xff);
                     int b1 = static_cast<int>((pixel1 >> 8) & 0xff);
@@ -96,7 +97,6 @@ bool Box::check_pixel_collision(GameObject *obj1, GameObject *obj2)
                     int r2 = static_cast<int>((pixel2 >> 24) & 0xff);
                     int g2 = static_cast<int>((pixel2 >> 16) & 0xff);
                     int b2 = static_cast<int>((pixel2 >> 8) & 0xff);
-
 
                     if(std::abs(r1-r2)<COLOR_THRESHOLD &&
                        std::abs(g1-g2)<COLOR_THRESHOLD &&
@@ -113,6 +113,7 @@ bool Box::check_pixel_collision(GameObject *obj1, GameObject *obj2)
             }
         }
     }
+    return false;
 }
 
 Box::Box(Window *window)
