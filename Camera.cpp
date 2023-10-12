@@ -3,3 +3,7 @@
 //
 
 #include "Camera.h"
+
+Camera::Camera(Window *window, Sprite *sprite) : window(window), sprite(sprite) {}
+
+Camera::~Camera() {}

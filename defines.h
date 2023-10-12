@@ -19,7 +19,7 @@
 #include <SDL_test_images.h>
 #include <SDL_blendmode.h>
 #include <SDL_ttf.h>
-//#include <SDL_mixer.h>
+#include <SDL_mixer.h>
 #include <SDL_version.h>
 #include <SDL_render.h>
 #include <SDL_FontCache.h>

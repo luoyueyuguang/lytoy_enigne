@@ -207,3 +207,14 @@ void Scene::set_update(int id)
     this->update_lists[id]();
     SDL_Log("Get update %d", id);
 }
+
+void Scene::on_key(GameEvent event, int key_id, const std::function<void()>& func)
+{
+    if (event.type == SDL_KEYDOWN)
+    {
+        if(event.key.keysym.sym == key_id)
+        {
+            func();
+        }
+    }
+}
