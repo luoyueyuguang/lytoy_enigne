@@ -15,7 +15,7 @@
 #include <SDL2/SDL_FontCache.h>*/
 
 extern "C" {
-#include <SDL.h>
+#include "SDL.h"
 #include <SDL_image.h>
 #include <SDL_test_images.h>
 #include <SDL_blendmode.h>
