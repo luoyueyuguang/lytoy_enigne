@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_AUDIO);
     SDL_Init(SDL_INIT_EVENTS);
     IMG_Init(IMG_INIT_PNG);
+    Mix_Init(MIX_INIT_MP3);
 
     //创建窗口
     Window window("test", SDL_WINDOW_SHOWN, 1470, 810);
