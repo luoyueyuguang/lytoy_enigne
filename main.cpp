@@ -52,8 +52,6 @@ int main(int argc, char* argv[])
     player.set_animation(rush_rect);
     player.set_animation(attacked_rect);
 
-    scene.add_sprite(&player);
-
     //创建菜单
     UI menu("../res/menu.png");
     menu.set_dst(0, 0, 1470, 810);
@@ -86,7 +84,7 @@ int main(int argc, char* argv[])
     //将菜单和场景添加到窗口中
     window.add_scene(&menu);
     window.add_scene(&scene);
-
+    scene.add_sprite(&player);
     //必须等精灵或按钮都被添加到场景后才能加载场景
     window.load_scene(0);
     window.load_scene(1);
@@ -142,6 +140,8 @@ int main(int argc, char* argv[])
         //更新渲染器
         window.RenderPresent();
     }
+
+    //释放资源
 
     SDL_Quit();
     IMG_Quit();

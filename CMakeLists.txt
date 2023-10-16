@@ -10,6 +10,6 @@ add_library(engine STATIC Scene.cpp Window.cpp Sprite.cpp GameObject.h GameObjec
         Button.cpp Box.cpp CircleButton.cpp Text.cpp ${DIR}/include/SDL2/SDL_FontCache.c Music.cpp) # 静态库
 # 库函数
 target_link_libraries(main engine)
-target_link_libraries(main SDL2 SDL2main SDL2_image SDL2_test SDL2_ttf)
+target_link_libraries(main SDL2 SDL2main SDL2_image SDL2_test SDL2_ttf SDL2_mixer)
 
 include_directories(${DIR}/bin ${DIR}/include/SDL2 ${DIR}/lib)
