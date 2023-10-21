@@ -1,7 +1,4 @@
-#include "defines.h"
-#include "Window.h"
-#include "Ui.h"
-#include "Text.h"
+#include "Event.h"
 
 
 
@@ -15,8 +12,11 @@ int main(int argc, char* argv[])
     IMG_Init(IMG_INIT_PNG);
     Mix_Init(MIX_INIT_MP3);
 
+    Event event;
+    event.game_loop();
+
     //创建窗口
-    Window window("test", SDL_WINDOW_SHOWN, 1470, 810);
+    /*Window window("test", SDL_WINDOW_SHOWN, 1470, 810);
     //创建渲染器
     window.CreateRenderer();
 
@@ -141,7 +141,7 @@ int main(int argc, char* argv[])
         window.RenderPresent();
     }
 
-    //释放资源
+    //释放资源*/
 
     SDL_Quit();
     IMG_Quit();

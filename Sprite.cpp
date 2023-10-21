@@ -140,3 +140,20 @@ uint32_t Sprite::get_color() const {
     SDL_Log("Get color %d %d %d %d", r, g, b, a);
     return (r << 24) | (g << 16) | (b << 8) | a;
 }
+
+void Sprite::play_animation(int id)
+{
+    static ull frame = 0;
+    frame &= this->animations[id].size() - 1;
+    this->src = this->animations[id][frame];
+    frame ++;
+}
+
+Sprite::Sprite(const char *fileName, Rect src, Rect dst, uint8_t flip)
+        : GameObject(fileName)
+{
+    this->src = src;
+    this->dst = dst;
+    this->flip = static_cast<SDL_RendererFlip>(flip);
+    SDL_Log("Create sprite %s", fileName);
+}

@@ -12,6 +12,7 @@ class Sprite : public GameObject
 {
 public:
     explicit Sprite(const char* file_name);
+    Sprite(const char *fileName, Rect src, Rect dst, uint8_t flip = SDL_FLIP_NONE);
     ~Sprite();
 
     virtual void render(Render* render);
@@ -35,6 +36,8 @@ public:
     virtual ull get_animation_size(int id);
 
     virtual std::vector<Rect> get_animation(int id);
+
+    void play_animation(int id);
 
     void set_r(uint8_t r);
     [[nodiscard]] uint8_t get_r() const;

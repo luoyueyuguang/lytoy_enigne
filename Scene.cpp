@@ -218,3 +218,12 @@ void Scene::on_key(GameEvent event, int key_id, const std::function<void()>& fun
         }
     }
 }
+
+void Scene::del_sprite()
+{
+    sprites.pop_back();
+}
+
+Sprite *Scene::get_sprite(int id) {
+    return sprites[id].second;
+}
