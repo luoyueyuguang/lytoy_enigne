@@ -50,6 +50,7 @@ public:
     void del_update(int id);
     void change_update(int id, std::function<void()> func);
     void set_update(int id);
+    void handle_update(int id);
 
     void on_key(GameEvent event, int key_id, const std::function<void()>& func);
 

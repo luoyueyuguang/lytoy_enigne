@@ -3,7 +3,7 @@ project(Ly_Engine)
 
 set(CMAKE_CXX_STANDARD 23)
 
-set(DIR x86_64-w64-mingw32)
+set(DIR D:/SDL2-2.28.3/x86_64-w64-mingw32)
 
 add_executable(main ../src/main.cpp) # 可执行文件
 add_library(engine STATIC Scene.cpp Window.cpp Sprite.cpp GameObject.h GameObject.cpp Ui.cpp
