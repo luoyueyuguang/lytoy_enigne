@@ -227,9 +227,3 @@ void Scene::del_sprite()
 Sprite *Scene::get_sprite(int id) {
     return sprites[id].second;
 }
-
-void Scene::handle_update(int id)
-{
-    this->update_lists[id]();
-    SDL_Log("Get update %d", id);
-}

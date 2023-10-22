@@ -33,6 +33,7 @@ class Event : private Res
         });
     }
 
+
     void render_loop()
     {
             //清除渲染器
@@ -155,49 +156,15 @@ class Event : private Res
                                                   !player.get_flip()};
                             ull id = scene.add_sprite(tmp);
                             weapons.emplace(tmp, 10);
+                            SDL_Log("weapons size:%zu", weapons.size());
                             scene.load_sprite(window.get_render(), static_cast<int>(id));
-                            SDL_Log("add weapon %d", id);
                         });
                         scene.handle_event(event);
                         break;
                     }
                 }
             }
-    }
-
-    void update_loop()
-    {
-        //根据场景id来更新场景
-        switch (scene_id)
-        {
-            case 0:
-                break;
-            case 1:
-            {
-                static int state = 1;
-                scene.handle_update(0);
-                if(enemy.get_x() < 0)
-                {
-                    state = 2;
-                    //enemy.set_y(0);
-                }
-                if(enemy.get_y() > player.get_y())
-                {
-                    state = 1;
-                }
-                SDL_Log("state %d", state);
-                scene.handle_update(state);
-                scene.handle_update(3);
-                scene.handle_update(4);
-                if(player_life.empty())
-                {
-                    scene_id = 3;
-                }
-                break;
-            }
-            default:
-                break;
-        }
+        SDL_Log("weapons size1:%zu", weapons.size());
     }
 
 public:
@@ -216,7 +183,6 @@ public:
             ll begin = SDL_GetTicks();
             //事件循环
             event_loop();
-            update_loop();
             //渲染循环
             render_loop();
 
@@ -228,6 +194,8 @@ public:
             {
                 SDL_Delay(delay);
             }
+            //SDL_Log("fps: %lld", 1000 / (SDL_GetTicks() - begin));
+            //SDL_Log("1 frame cost: %lld", SDL_GetTicks() - begin);
         }
     }
 };

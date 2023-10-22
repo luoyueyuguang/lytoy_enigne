@@ -71,8 +71,7 @@ void CircleButton::render_circle(Render *render, int radius, int centreX, int ce
             d += 2 * offsety - 1;
             offsety -= 1;
         }
-        else
-        {
+        else {
             d += 2 * (offsety - offsetx - 1);
             offsety -= 1;
             offsetx += 1;
