@@ -98,8 +98,6 @@ protected:
                                  {0, 3160, 500, 240},
                                  {0, 2400, 480, 240},};
 
-    SDL_Rect attack = {0, 2660, 500, 250};
-
     void create_renderer();
     void create_sprite();
     void create_scene();

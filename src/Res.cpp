@@ -177,14 +177,12 @@ void Res::scene_add_update()
         enemy.play_animation(0);
         enemy.set_w(60);
         enemy.set_h(300);
-        if(enemy.get_y() >= 555)
+        if(enemy.get_x() < 0 || enemy.get_x() > 1470)
         {
             enemy.set_y(0);
             enemy.set_x(player.get_x());
         }
-        {
-            enemy.set_y(enemy.get_y() + 12);
-        }
+        enemy.set_y(enemy.get_y() + 12);
     });
 
     scene.add_update([&]() {

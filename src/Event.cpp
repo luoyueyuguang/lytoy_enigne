@@ -170,6 +170,7 @@ void Event::event_loop()
                     enemy_life = 5;
                     player.set_x(735);
                     enemy.set_x(0);
+                    enemy.set_flip(SDL_FLIP_HORIZONTAL);
                     window.load_scene(1);
                 });
                 win_scene_exit.on_click(event, [&]()
@@ -190,7 +191,6 @@ void Event::event_loop()
                                                                              SDL_FLIP_NONE}));
                     }
                     player.set_x(735);
-                    enemy.set_x(0);
                     window.load_scene(1);
                 });
                 lose_scene_exit.on_click(event, [&]()
@@ -214,17 +214,18 @@ void Event::update_loop()
         {
             static int state = 1;
             scene.handle_update(0);
-            if(enemy.get_x() < 0)
+            scene.handle_update(state);
+            if(enemy.get_x() < 0 && state == 1)
             {
                 state = 2;
-                //enemy.set_y(0);
             }
-            if(enemy.get_y() > player.get_y())
+            if(enemy.get_y() > player.get_y() && state == 2)
             {
                 state = 1;
+                enemy.set_x(15);enemy.set_y(555);
+                enemy.set_flip(SDL_FLIP_NONE);
             }
             SDL_Log("state %d", state);
-            scene.handle_update(state);
             scene.handle_update(3);
             scene.handle_update(4);
             scene.handle_update(5);
